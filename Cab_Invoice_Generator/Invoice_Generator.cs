@@ -9,6 +9,7 @@ namespace Cab_Invoice_Generator
         readonly int COST_PER_KM = 10;
         readonly int COST_PER_MIN = 1;
         readonly int MIN_FARE = 5;
+        double totalFare;
         public Invoice_Generator()
         { } // default constructor
         public double CalculateFare(Ride ride)
@@ -21,6 +22,14 @@ namespace Cab_Invoice_Generator
                 throw new Cab_Invoice_Exception(Cab_Invoice_Exception.ExceptionType.INVALID_TIME, "Time is invalid"); // throwing invalid time exception
             double fare = (ride.distance * COST_PER_KM) + (ride.time * COST_PER_MIN);
             return Math.Max(fare, MIN_FARE); // if calculated fare is lesser than minimum fare, returns minimum fare
+        }
+        public double FareOfMultipleRides(List<Ride> listOfRides)
+        {
+            // method to calculate fare of multiple rides
+            this.totalFare = 0;
+            foreach (var ride in listOfRides)
+                this.totalFare = totalFare + CalculateFare(ride);
+            return this.totalFare;
         }
     }
 }
