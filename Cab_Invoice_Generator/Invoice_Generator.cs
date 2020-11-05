@@ -11,6 +11,7 @@ namespace Cab_Invoice_Generator
         readonly int MIN_FARE = 5;
         double totalFare;
         Invoice_Summary invoiceSummary = new Invoice_Summary();
+        Ride_Repository rideRepository = new Ride_Repository();
         public Invoice_Generator()
         { } // default constructor
         public double CalculateFare(Ride ride)
@@ -36,6 +37,16 @@ namespace Cab_Invoice_Generator
         {
             double fare = FareOfMultipleRides(listOfRides);
             Invoice_Data invoiceData = invoiceSummary.GetInvoice(listOfRides.Count, totalFare);
+            return invoiceData;
+        }
+        public void AddRideDetails(int userId, List<Ride> listOfRides)
+        {
+            rideRepository.Add(userId, listOfRides);
+        }
+        public Invoice_Data GetInvoice(int userId)
+        {
+            List<Ride> listOfRides = rideRepository.GetRides(userId);
+            Invoice_Data invoiceData = GetSummary(listOfRides);
             return invoiceData;
         }
     }
