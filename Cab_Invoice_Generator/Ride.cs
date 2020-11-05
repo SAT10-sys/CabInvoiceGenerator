@@ -6,6 +6,11 @@ namespace Cab_Invoice_Generator
 {
     public class Ride
     {
+        public enum RideType
+        {
+            NORMAL,
+            PREMIUM
+        }
         public double distance;
         public int time;
         public Ride()
