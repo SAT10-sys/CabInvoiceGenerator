@@ -86,5 +86,12 @@ namespace Cab_Invoice_Generator_Program_Test
             var exception = Assert.Throws<Cab_Invoice_Exception>(() => invoiceGenerator.GetInvoice(1));
             Assert.AreEqual(Cab_Invoice_Exception.ExceptionType.INVALID_USERID, exception.exceptionType);
         }
+        [Test]
+        public void TestMethod10()
+        {
+            invoiceGenerator = new Invoice_Generator(RideType.NORMAL);
+            var exception = Assert.Throws<Cab_Invoice_Exception>(() => invoiceGenerator.GetInvoice(1));
+            Assert.AreEqual(Cab_Invoice_Exception.ExceptionType.INVALID_USERID, exception.exceptionType);
+        }
     }
 }
