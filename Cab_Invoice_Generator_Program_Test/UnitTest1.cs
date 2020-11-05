@@ -52,5 +52,15 @@ namespace Cab_Invoice_Generator_Program_Test
             var exception = Assert.Throws<Cab_Invoice_Exception>(() => invoiceGenerator.FareOfMultipleRides(listOfRides));
             Assert.AreEqual(Cab_Invoice_Exception.ExceptionType.NULL_RIDES, exception.exceptionType);
         }
+        [Test]
+        public void TestMethod6()
+        {
+            listOfRides = new List<Ride> { new Ride(5, 20), new Ride(3, 15), new Ride(2, 10) };
+            double expectedValue = 145;
+            int expectedRides = 3;
+            double expectedAverage = expectedValue / expectedRides;
+            Invoice_Data invoiceData = invoiceGenerator.GetSummary(listOfRides);
+            Assert.IsTrue(invoiceData.numberOfRides == expectedRides && invoiceData.totalFare == expectedValue && invoiceData.averageFare == expectedAverage);
+        }
     }
 }
