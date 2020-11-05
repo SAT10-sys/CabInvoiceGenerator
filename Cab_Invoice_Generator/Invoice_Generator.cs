@@ -10,6 +10,7 @@ namespace Cab_Invoice_Generator
         readonly int COST_PER_MIN = 1;
         readonly int MIN_FARE = 5;
         double totalFare;
+        Invoice_Summary invoiceSummary = new Invoice_Summary();
         public Invoice_Generator()
         { } // default constructor
         public double CalculateFare(Ride ride)
@@ -30,6 +31,12 @@ namespace Cab_Invoice_Generator
             foreach (var ride in listOfRides)
                 this.totalFare = totalFare + CalculateFare(ride);
             return this.totalFare;
+        }
+        public Invoice_Data GetSummary(List<Ride> listOfRides)
+        {
+            double fare = FareOfMultipleRides(listOfRides);
+            Invoice_Data invoiceData = invoiceSummary.GetInvoice(listOfRides.Count, totalFare);
+            return invoiceData;
         }
     }
 }
